@@ -3,27 +3,44 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-    const {createNewUser}=useContext(AuthContext)
+    const {createNewUser,setUser,users}=useContext(AuthContext)
     const handleForm=e=>{
         e.preventDefault()
         const form = new FormData(e.target)
         const name= form.get("name")
         const email= form.get("email")
         const password= form.get("password")
-        const photo= form.get("photo")
-        createNewUser(email,password)
-        .then((result) => {
-            // Signed up 
-            // const user = userCredential.user;
-            console.log(result);
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode,errorMessage);
-            // ..
-          });
-        console.log(email,name,password,photo);
+      const photo = form.get("photo")
+      createNewUser(email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        setUser(user)
+        console.log(users)
+        // console.log(user)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+        
+        // ..
+      });
+      // console.log(createNewUser)
+        // .then((result) => {
+        //     // Signed up
+        //   // const user = userCredential.user;
+        //   // setUser(result)
+        //     console.log(result);
+        //   })
+        //   .catch((error) => {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        //     console.log(errorCode,errorMessage);
+        //     // ..
+        //   });
+        // console.log(email,name,password,photo);
     }
     return (
         <div className="flex flex-col justify-center items-center my-4">
