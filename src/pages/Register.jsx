@@ -16,7 +16,8 @@ const Register = () => {
         // Signed up 
         const user = userCredential.user;
         setUser(user)
-        console.log(users)
+        e.target.reset()
+        // console.log(users)
         // console.log(user)
         // ...
       })
@@ -27,20 +28,7 @@ const Register = () => {
         
         // ..
       });
-      // console.log(createNewUser)
-        // .then((result) => {
-        //     // Signed up
-        //   // const user = userCredential.user;
-        //   // setUser(result)
-        //     console.log(result);
-        //   })
-        //   .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     console.log(errorCode,errorMessage);
-        //     // ..
-        //   });
-        // console.log(email,name,password,photo);
+
     }
     return (
         <div className="flex flex-col justify-center items-center my-4">

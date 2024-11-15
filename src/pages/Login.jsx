@@ -1,17 +1,37 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-    const text = useContext(AuthContext)
-    console.log(text);
+    const {signInUser,setUser} = useContext(AuthContext)
+    const navigate =useNavigate()
 
+    // console.log(text);
+    const handleForm=e=>{
+      e.preventDefault()
+      const form = new FormData(e.target)
+      
+      const email= form.get("email")
+      const password= form.get("password")
+      signInUser(email,password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user)
+        navigate('/')
+
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+    }
     return (
         <div className="flex flex-col justify-center items-center min-h-[90vh]">
             <div className="card bg-base-300 w-full max-w-lg mx-auto shrink-0 p-6 text-center rounded-none">
             <h2 className="text-xl">Login Your Account</h2>
 
-      <form className="card-body">
+      <form onSubmit={handleForm}  className="card-body">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email Address</span>
