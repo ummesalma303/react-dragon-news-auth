@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NewsCard = (props = {}) => {
   const { news } = props || {};
-// console.log(news._id)
+console.log(news._id)
   return (
     <div className=" p-4 bg-white rounded-lg shadow-md">
       {/* Author Information */}
@@ -36,7 +36,7 @@ const NewsCard = (props = {}) => {
       {/* Details */}
       <p className="text-gray-700 text-sm mb-4">
         {news.details.slice(0, 150)}...{" "}
-        <Link to={`/news/${news._id}}`} className="text-primary">Read More</Link>
+        <Link to={`/news/${news._id}`} className="text-primary">Read More</Link>
       </p>
 
       {/* Ratings and Views */}
