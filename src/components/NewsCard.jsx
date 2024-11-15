@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NewsCard = (props = {}) => {
   const { news } = props || {};
-
+// console.log(news._id)
   return (
     <div className=" p-4 bg-white rounded-lg shadow-md">
       {/* Author Information */}
