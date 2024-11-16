@@ -1,12 +1,12 @@
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import RightNav from "../components/layout-component/RightNav";
 import NewsDetailsCard from "./NewsDetailsCard";
 
 const NewsDetails = () => {
-    const data =useLoaderData()
-    console.log(data);
+    // const data =useLoaderData()
+    // console.log(data);
     return (
         <div>
            <header>

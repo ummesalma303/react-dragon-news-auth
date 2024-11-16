@@ -1,7 +1,7 @@
 
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -9,26 +9,50 @@ export const AuthContext = createContext(null)
 const auth = getAuth(app);
 const AuthProvider = ({children}) => {
     const [users,setUser]=useState(null)
+    const [loader,setLoader]=useState(true)
     // create user
     const createNewUser=( email, password)=>{
+        setLoader(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     // login user
     const signInUser = (email, password) => {
+        setLoader(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
+    // reset password
+    const resetPassword=(email)=>{
+        console.log(email);
+        sendPasswordResetEmail(auth, email)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode,errorMessage);
+  })
+    }
+
+
+    // update user profile
+    const updateUser=(updateData)=>{
+        console.log(updateData);
+        return updateProfile(auth.currentUser, updateData)
+    }
+
+
+    
     // log out user
     const logOutUser=()=>{
-        signOut(auth).then((res) => {
-           console.log(res);
-          }).catch((error) => {
-            console.log(error);
-          });
+        setLoader(true)
+        signOut(auth)
     }
     // on auth change
     useEffect(()=>{
         const unsubscribe= onAuthStateChanged(auth, (user)=>{
             setUser(user);
+            setLoader(false)
         } )
     return ()=> unsubscribe()
 },[])
@@ -37,7 +61,10 @@ const AuthProvider = ({children}) => {
         users,
         createNewUser,
         signInUser,
-        logOutUser
+        logOutUser,
+        resetPassword,
+        updateUser,
+        loader
     }
     return (
         <div>

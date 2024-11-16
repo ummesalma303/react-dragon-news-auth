@@ -1,12 +1,14 @@
-import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-    const {signInUser,setUser} = useContext(AuthContext)
+    const {signInUser,setUser,resetPassword} = useContext(AuthContext)
+    const [error,setError]=useState([])
+    const emailRef=useRef()
     const navigate =useNavigate()
+    const location = useLocation()
 
-    // console.log(text);
     const handleForm=e=>{
       e.preventDefault()
       const form = new FormData(e.target)
@@ -17,15 +19,23 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user)
-        navigate('/')
+        console.log(user);
+
+        navigate(location?.state?location?.state:'/')
 
       })
-      .catch((error) => {
+      .catch((err) => {
         // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        // const errorMessage = error.message;
+        setError(err.code)
+        // console.log(errorMessage);
       });
     }
+    // console.log();
+    // const resetPassword=()=>{
+      
+    // }
+
     return (
         <div className="flex flex-col justify-center items-center min-h-[90vh]">
             <div className="card bg-base-300 w-full max-w-lg mx-auto shrink-0 p-6 text-center rounded-none">
@@ -36,7 +46,7 @@ const Login = () => {
           <label className="label">
             <span className="label-text">Email Address</span>
           </label>
-          <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+          <input type="email" name="email" ref={emailRef} placeholder="email" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
@@ -44,8 +54,13 @@ const Login = () => {
           </label>
           <input type="password" name="password" placeholder="password" className="input input-bordered" required />
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            <a href="#" onClick={()=>resetPassword(emailRef.current.value)} className="label-text-alt link link-hover">Forgot password?</a>
           </label>
+          {
+            error&&<label className="label">
+            <p className="label-text-alt link link-hover text-red-500">{error}</p>
+          </label>
+          }
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-neutral rounded-none">Login</button>

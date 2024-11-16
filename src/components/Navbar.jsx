@@ -20,7 +20,7 @@ const Navbar = () => {
       </div>
       <div className="login flex gap-2 items-center">
         <div className=" ">
-          <img src={userIcon} alt="" />
+          <img src={user?.displayName? user.displayName:userIcon} alt="" />
         </div>
        {
         user?<button onClick={logOutUser} className="btn btn-neutral rounded-none">Log Out</button>:<Link to='/auth/login' className="btn btn-neutral rounded-none">Login</Link>

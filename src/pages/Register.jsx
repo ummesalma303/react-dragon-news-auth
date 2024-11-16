@@ -1,9 +1,12 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-    const {createNewUser,setUser,users}=useContext(AuthContext)
+    const {createNewUser,setUser}=useContext(AuthContext)
+    const [error,setError,updateUser]=useState([])
+    const navigate =useNavigate()
+
     const handleForm=e=>{
         e.preventDefault()
         const form = new FormData(e.target)
@@ -13,22 +16,31 @@ const Register = () => {
       const photo = form.get("photo")
       createNewUser(email, password)
       .then((userCredential) => {
-        // Signed up 
         const user = userCredential.user;
+        navigate('/')
         setUser(user)
+        console.log(user);
+        const infoData ={
+          displayName:name,
+          photoURL:photo
+        }
+        console.log(infoData);
+
+        updateUser(infoData)
+        .then((res) => {
+          console.log(res);
+        }).catch((error) => {
+          console.log(error);
+        });
+        // console.log(info);
         e.target.reset()
-        // console.log(users)
-        // console.log(user)
-        // ...
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage)
-        
-        // ..
+      .catch((err) => {
+        const errorCode = err.code;
+        setError(errorCode)
       });
 
+     
     }
     return (
         <div className="flex flex-col justify-center items-center my-4">
@@ -59,9 +71,11 @@ const Register = () => {
             <span className="label-text">Password</span>
           </label>
           <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-          <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-          </label>
+         {
+          error&& <label className="label">
+          <p className="label-text-alt link link-hover text-red-500">{error}</p>
+        </label>
+         }
         </div>
         <div className="form-control ">
           <button className="btn btn-neutral rounded-none">Register</button>
