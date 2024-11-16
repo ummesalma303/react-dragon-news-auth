@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-    const {createNewUser,setUser}=useContext(AuthContext)
-    const [error,setError,updateUser]=useState([])
+    const {createNewUser,setUser,updateUser}=useContext(AuthContext)
+    const [error,setError]=useState([])
     const navigate =useNavigate()
 
     const handleForm=e=>{
@@ -19,20 +19,15 @@ const Register = () => {
         const user = userCredential.user;
         navigate('/')
         setUser(user)
-        // console.log(user);
         const infoData ={
           displayName:name,
           photoURL:photo
         }
-        console.log(infoData);
-
+       
         updateUser(infoData)
         .then(() => {
-          // console.log(res);
         }).catch(() => {
-          // console.log(error);
         });
-        // console.log(info);
         e.target.reset()
       })
       .catch((err) => {

@@ -6,7 +6,7 @@ import NewsDetailsCard from "./NewsDetailsCard";
 
 const NewsDetails = () => {
     // const data =useLoaderData()
-    // console.log(data);
+    
     return (
         <div>
            <header>
