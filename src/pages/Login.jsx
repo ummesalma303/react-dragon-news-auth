@@ -19,7 +19,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user)
-        console.log(user);
+       
 
         navigate(location?.state?location?.state:'/')
 

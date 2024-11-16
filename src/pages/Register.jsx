@@ -19,7 +19,7 @@ const Register = () => {
         const user = userCredential.user;
         navigate('/')
         setUser(user)
-        console.log(user);
+        // console.log(user);
         const infoData ={
           displayName:name,
           photoURL:photo
@@ -27,10 +27,10 @@ const Register = () => {
         console.log(infoData);
 
         updateUser(infoData)
-        .then((res) => {
-          console.log(res);
-        }).catch((error) => {
-          console.log(error);
+        .then(() => {
+          // console.log(res);
+        }).catch(() => {
+          // console.log(error);
         });
         // console.log(info);
         e.target.reset()
