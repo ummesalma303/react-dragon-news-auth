@@ -28,10 +28,10 @@ const Login = () => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
         setError(err.code)
-       
+        // console.log(errorMessage);
       });
     }
-    
+    // console.log();
     // const resetPassword=()=>{
       
     // }

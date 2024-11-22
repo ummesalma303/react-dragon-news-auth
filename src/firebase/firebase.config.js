@@ -1,4 +1,3 @@
-
 // // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // // TODO: Add SDKs for Firebase products that you want to use
@@ -6,20 +5,18 @@
 
 // // Your web app's Firebase configuration
 // const firebaseConfig = {
-//   apiKey: import.meta.env.VITE_apiKey,
-//   authDomain: import.meta.env.VITE_authDomain,
-//   projectId: import.meta.env.VITE_projectId,
-//   storageBucket: import.meta.env.VITE_storageBucket,
-//   messagingSenderId: import.meta.VITE_messagingSenderId,
-//   appId: import.meta.VITE_appId
+//   apiKey: "AIzaSyCRK3l4VY3A0r5iqO-Kc1LxWTlndAEwCNQ",
+//   authDomain: "react-dragon-news-auth-81f59.firebaseapp.com",
+//   projectId: "react-dragon-news-auth-81f59",
+//   storageBucket: "react-dragon-news-auth-81f59.firebasestorage.app",
+//   messagingSenderId: "925592312747",
+//   appId: "1:925592312747:web:cd2dcc701dd6e1e41e10ee"
 // };
 
 // // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 
 // export default app
-
-
 
 
 
@@ -34,14 +31,15 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCRK3l4VY3A0r5iqO-Kc1LxWTlndAEwCNQ",
-  authDomain: "react-dragon-news-auth-81f59.firebaseapp.com",
-  projectId: "react-dragon-news-auth-81f59",
-  storageBucket: "react-dragon-news-auth-81f59.firebasestorage.app",
-  messagingSenderId: "925592312747",
-  appId: "1:925592312747:web:cd2dcc701dd6e1e41e10ee"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.VITE_messagingSenderId,
+  appId: import.meta.VITE_appId
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 export default app

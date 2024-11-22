@@ -5,22 +5,25 @@ import { AuthContext } from "../provider/AuthProvider";
 const Navbar = () => {
   // const {user}=useContext(AuthContext)
   const { users:user,logOutUser } = useContext(AuthContext);
- 
+  // console.log(users)
+  // <script>
+  //     AOS.init();
+  //   </script>
   return (
-    <div className="flex justify-between items-center">
+       <div className="flex justify-between items-center fade-right ">
       <div className="">
         {
           user ? <h2>{ user?.email}</h2>:' '
         }
       </div>
-      <div className="nav space-x-5">
-        <Link to="/">Home</Link>
+      <div className="nav space-x-5 ">
+        <Link to="/" cl>Home</Link>
         <Link to="/career">Career</Link>
         <Link to="/about">About</Link>
       </div>
       <div className="login flex gap-2 items-center">
         <div className=" ">
-          <img className="w-14" src={user?.photoURL? user?.photoURL:userIcon} alt="" />
+          <img src={user?.displayName? user.displayName:userIcon} alt="" />
         </div>
        {
         user?<button onClick={logOutUser} className="btn btn-neutral rounded-none">Log Out</button>:<Link to='/auth/login' className="btn btn-neutral rounded-none">Login</Link>

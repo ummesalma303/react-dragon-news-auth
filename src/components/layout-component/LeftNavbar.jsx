@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 const LeftNavbar = () => {
   const [categories, setCategories] = useState([]);
@@ -14,8 +17,15 @@ const LeftNavbar = () => {
   //     "category_name": "Breaking News"
   //   }
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000
+    });
+    // AOS.refresh();
+  }, []);
+  
   return (
-    <div>
+    <div className="fade-right">
       <h2 className="font-semibold mb-3">All Caterogy ({categories.length})</h2>
       <div className="flex flex-col gap-2 ">
         {categories.map((category) => (

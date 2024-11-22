@@ -22,18 +22,22 @@ const AuthProvider = ({children}) => {
     }
     // reset password
     const resetPassword=(email)=>{
+        // console.log(email);
         sendPasswordResetEmail(auth, email)
   .then(() => {
+    // console.log(res);
   })
   .catch(() => {
     // const errorCode = error.code;
     // const errorMessage = error.message;
+    // console.log(errorCode,errorMessage);
   })
     }
 
 
     // update user profile
     const updateUser=(updateData)=>{
+        // console.log(updateData);
         return updateProfile(auth.currentUser, updateData)
     }
 
